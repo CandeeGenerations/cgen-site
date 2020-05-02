@@ -6,5 +6,19 @@
 
 module.exports = {
   /* Your site config here */
-  plugins: [],
+  plugins: [
+    'gatsby-plugin-typescript',
+    {
+      resolve: 'gatsby-plugin-eslint',
+      options: {
+        test: /\.ts$|\.tsx$/,
+        exclude: /(node_modules|.cache|public)/,
+        stages: ['develop'],
+        options: {
+          emitWarning: true,
+          failOnError: false,
+        },
+      },
+    },
+  ],
 }
