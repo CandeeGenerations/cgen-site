@@ -1,0 +1,12 @@
+type Testimonial @collection(name: "testimonials") {
+  _id: String!
+  title: String!
+  message: String!
+  name: String!
+  image: String!
+  organization: String!
+}
+
+type Query {
+  getTestimonials: [Testimonial!]! @index(name: "get_testimonials")
+}
