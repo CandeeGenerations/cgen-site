@@ -12,8 +12,6 @@ const Testimonials = (): JSX.Element => {
   const homeContext = useContext(HomeContext)
   const {data: testimonials} = homeContext.siteData.getTestimonials
 
-  console.log('testimonials :', testimonials)
-
   return (
     <section className="section bg-clients" id="testimonials">
       <div className="bg-overlay" />
