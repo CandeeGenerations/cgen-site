@@ -30,6 +30,11 @@ export default function HTML(props) {
         />
         <link rel="manifest" href="favicon_io/site.webmanifest" />
         {props.headComponents}
+        <script
+          charset="utf-8"
+          type="text/javascript"
+          src="https://js.hsforms.net/forms/shell.js"
+        ></script>
       </head>
       <body {...props.bodyAttributes}>
         {props.preBodyComponents}

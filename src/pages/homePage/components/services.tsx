@@ -1,50 +1,53 @@
-import React from 'react'
-import {Link} from 'gatsby'
+import React, {useState} from 'react'
 import {Row, Col} from 'reactstrap'
 
+import ServiceModal from './serviceModal'
+
+interface ServiceType {
+  title: string
+  content: string
+  icon: string
+}
+
 const Services = (): JSX.Element => {
-  const list = [
+  const [modal, setModal] = useState<ServiceType | undefined>(undefined)
+
+  const list: ServiceType[] = [
     {
       icon: 'mdi mdi-web',
       title: 'Web Design',
       content:
-        'You need a website for your company, church, or product. Let us build that for you. We utilize Wordpress to build static websites that are easy to keep up to date as you need',
-      learnMoreLoc: 'web-design',
+        'You need a website for your company, church, or product. Let us build that for you. We utilize Wordpress to build static websites that are easy to keep up to date as you need.',
     },
     {
       icon: 'mdi mdi-palette',
       title: 'Graphics Design',
       content:
         'From company logos, to business cards, to prayer cards, to flyers, posters, shirts, knick-knacks, or anything you need designed, we have you covered! Let us design it for you!',
-      learnMoreLoc: 'graphics-design',
     },
     {
       icon: 'mdi mdi-cursor-default-click',
       title: 'Web App Development',
       content:
-        'Do you have a great idea for a web or mobile application? We can build it for you! We use cutting edge web technologies to make your ideas become realities',
-      learnMoreLoc: 'web-app-development',
+        'Do you have a great idea for a web or mobile application? We can build it for you! We use cutting edge web technologies to make your ideas become realities.',
     },
     {
       icon: 'mdi mdi-camera',
       title: 'Photography',
       content:
-        "We have all the tools necessary to take the most beautiful pictures of you and yours on your special day. Weddings, family portraits, graduations, you name it and we'll snap it",
-      learnMoreLoc: 'photography',
+        "We have all the tools necessary to take the most beautiful pictures of you and yours on your special day. Weddings, family portraits, graduations, you name it and we'll snap it.",
     },
     {
       icon: 'mdi mdi-video',
       title: 'Videography',
       content:
-        'Do you need a video for your event, presentation, or celebration? Using HD video cameras, we can grab the footage you want and put it together with graphics and music',
-      learnMoreLoc: 'videography',
+        'Do you need a video for your event, presentation, or celebration? Using HD video cameras, we can grab the footage you want and put it together with graphics and music.',
     },
     {
       icon: 'mdi mdi-account-multiple',
       title: 'Consultation',
       content:
-        "You just need some assistance with a technical task or problem that you're dealing with. We can help with that! Let us partner with you and help you get through",
-      learnMoreLoc: 'consultation',
+        "You just need some assistance with a technical task or problem that you're dealing with. We can help with that! Let us partner with you and help you get through.",
     },
   ]
 
@@ -75,25 +78,27 @@ const Services = (): JSX.Element => {
                   <div className="services-desc">
                     <div className="service-title mb-2 position-relative">
                       <h5 className="font-weight-normal mb-3">
-                        <Link
+                        <div
                           className="text-dark"
-                          to={`/${service.learnMoreLoc}`}
+                          css={{cursor: 'pointer'}}
+                          onClick={(): void => setModal(service)}
                         >
                           {service.title}
-                        </Link>
+                        </div>
                       </h5>
                     </div>
 
                     <p className="text-muted mb-3 f-14">{service.content}</p>
 
                     <p className="mb-0 text-uppercase f-13">
-                      <Link
-                        className="text-primary"
-                        to={`/${service.learnMoreLoc}`}
+                      <div
+                        className="text-dark"
+                        css={{cursor: 'pointer'}}
+                        onClick={(): void => setModal(service)}
                       >
                         learn more
                         <i className="mdi mdi-arrow-right ml-2" />
-                      </Link>
+                      </div>
                     </p>
                   </div>
                 </div>
@@ -102,6 +107,13 @@ const Services = (): JSX.Element => {
           })}
         </Row>
       </div>
+
+      <ServiceModal
+        isOpen={modal !== undefined}
+        text={modal?.content || ''}
+        title={modal?.title || ''}
+        toggle={(): void => setModal(undefined)}
+      />
     </section>
   )
 }
