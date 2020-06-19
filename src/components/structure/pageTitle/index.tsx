@@ -8,7 +8,14 @@ export interface PageTitleProps {
 
 const PageTitle = (props: PageTitleProps): JSX.Element => {
   return (
-    <section className="section home-2-bg" css={{height: '30vh'}} id="home">
+    <section
+      className="section home-2-bg"
+      css={{
+        height: '30vh',
+        '@media (max-width: 768px)': {height: '40vh', paddingTop: 150},
+      }}
+      id="home"
+    >
       <div className="home-center">
         <div className="home-desc-center">
           <div className="container">

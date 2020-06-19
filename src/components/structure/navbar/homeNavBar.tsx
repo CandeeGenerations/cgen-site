@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import {Link} from 'react-scroll'
+import {Collapse, Navbar, NavbarToggler} from 'reactstrap'
 
 import logo from '../../../assets/images/cgen/logo-white-small.png'
 
 const HomeNavBar = (): JSX.Element => {
   const [tab, setTab] = useState('home')
+  const [isOpen, setIsOpen] = useState(false)
   const [stickyNav, setStickyNav] = useState(false)
   const targetIds = ['home', 'about', 'services', 'testimonials']
 
@@ -64,7 +66,7 @@ const HomeNavBar = (): JSX.Element => {
   ]
 
   return (
-    <nav
+    <Navbar
       className={`navbar navbar-expand-lg navbar-light fixed-top navbar-custom sticky sticky-dark ${
         stickyNav ? 'nav-sticky' : ''
       }`}
@@ -80,19 +82,11 @@ const HomeNavBar = (): JSX.Element => {
           &nbsp;&nbsp;Candee Generations
         </Link>
 
-        <button
-          aria-controls="navbarCollapse"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-          className="navbar-toggler"
-          data-target="#navbarCollapse"
-          data-toggle="collapse"
-          type="button"
-        >
+        <NavbarToggler onClick={(): void => setIsOpen(!isOpen)}>
           <i className="mdi mdi-menu" />
-        </button>
+        </NavbarToggler>
 
-        <div className="collapse navbar-collapse" id="navbarCollapse">
+        <Collapse isOpen={isOpen} navbar>
           <div className="ml-auto" data-nav="list">
             <ul className="navbar-nav ml-auto navbar-center" id="mySidenav">
               {links.map(link => (
@@ -107,6 +101,7 @@ const HomeNavBar = (): JSX.Element => {
                     to={link.to}
                     smooth
                     spy
+                    onClick={(): void => setIsOpen(false)}
                   >
                     {link.name}
                   </Link>
@@ -114,9 +109,9 @@ const HomeNavBar = (): JSX.Element => {
               ))}
             </ul>
           </div>
-        </div>
+        </Collapse>
       </div>
-    </nav>
+    </Navbar>
   )
 }
 

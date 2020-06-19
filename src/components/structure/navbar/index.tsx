@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from 'react'
 import {Link} from 'gatsby'
+import {Collapse, Navbar, NavbarToggler} from 'reactstrap'
 
 import logo from '../../../assets/images/cgen/logo-white-small.png'
 
 const NavBar = (): JSX.Element => {
+  const [isOpen, setIsOpen] = useState(false)
   const [stickyNav, setStickyNav] = useState(false)
 
   const trackScrolling = (): void => {
@@ -37,7 +39,7 @@ const NavBar = (): JSX.Element => {
   ]
 
   return (
-    <nav
+    <Navbar
       className={`navbar navbar-expand-lg navbar-light fixed-top navbar-custom sticky sticky-dark ${
         stickyNav ? 'nav-sticky' : ''
       }`}
@@ -49,19 +51,11 @@ const NavBar = (): JSX.Element => {
           &nbsp;&nbsp;Candee Generations
         </Link>
 
-        <button
-          aria-controls="navbarCollapse"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-          className="navbar-toggler"
-          data-target="#navbarCollapse"
-          data-toggle="collapse"
-          type="button"
-        >
+        <NavbarToggler onClick={(): void => setIsOpen(!isOpen)}>
           <i className="mdi mdi-menu" />
-        </button>
+        </NavbarToggler>
 
-        <div className="collapse navbar-collapse" id="navbarCollapse">
+        <Collapse isOpen={isOpen} navbar>
           <div className="ml-auto" data-nav="list">
             <ul className="navbar-nav ml-auto navbar-center" id="mySidenav">
               <li key="home" className="nav-item">
@@ -79,9 +73,9 @@ const NavBar = (): JSX.Element => {
               ))}
             </ul>
           </div>
-        </div>
+        </Collapse>
       </div>
-    </nav>
+    </Navbar>
   )
 }
 

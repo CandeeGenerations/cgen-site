@@ -1,4 +1,6 @@
-import React, {useContext} from 'react'
+/** @jsx jsx */
+import {css, jsx} from '@emotion/core'
+import {useContext} from 'react'
 import {Row, Col} from 'reactstrap'
 import RBCarousel from 'react-bootstrap-carousel'
 
@@ -10,6 +12,11 @@ import quoteImg from '../../../assets/images/quote-img.png'
 
 const Testimonials = (): JSX.Element => {
   const homeContext = useContext(HomeContext)
+
+  if (!homeContext || !homeContext.siteData) {
+    return null
+  }
+
   const {data: testimonials} = homeContext.siteData.getTestimonials
 
   return (
@@ -32,6 +39,13 @@ const Testimonials = (): JSX.Element => {
         <Row>
           <Col span={12} style={{marginTop: 20}}>
             <RBCarousel
+              css={css`
+                @media (max-width: 768px) {
+                  .carousel-indicators {
+                    display: none;
+                  }
+                }
+              `}
               pauseOnVisibility={true}
               slideshowSpeed={5000}
               version={4}
@@ -49,7 +63,10 @@ const Testimonials = (): JSX.Element => {
                         {testimonial.message}
                       </p>
 
-                      <div className="quote-img">
+                      <div
+                        className="quote-img"
+                        css={{'@media (max-width: 768px)': {display: 'none'}}}
+                      >
                         <img alt="" className="img-fluid" src={quoteImg} />
                       </div>
                     </div>
