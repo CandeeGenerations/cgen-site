@@ -1,4 +1,5 @@
-import React from 'react'
+import React, {useEffect} from 'react'
+import ReactGA from 'react-ga'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '@mdi/font/css/materialdesignicons.min.css'
@@ -17,6 +18,10 @@ type Props = {
 }
 
 const MainLayout = (props: Props): JSX.Element => {
+  useEffect(() => {
+    ReactGA.initialize('UA-162942275-1')
+  }, [])
+
   return (
     <>
       <div id="top" />
