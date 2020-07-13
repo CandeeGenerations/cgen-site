@@ -7,6 +7,7 @@ export default function HTML(props) {
       window.location.host === 'candeegenerations.com' ||
       window.location.href === 'http://www.candeegenerations.com/'
     ) {
+      console.log('urls :', [window.location.host, window.location.href])
       window.location.href = 'https://www.candeegenerations.com'
     }
   }, [])
