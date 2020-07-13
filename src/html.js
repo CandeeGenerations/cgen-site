@@ -1,7 +1,16 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import PropTypes from 'prop-types'
 
 export default function HTML(props) {
+  useEffect(() => {
+    if (
+      window.location.host === 'candeegenerations.com' ||
+      window.location.href === 'http://www.candeegenerations.com/'
+    ) {
+      window.location.href = 'https://www.candeegenerations.com'
+    }
+  }, [])
+
   return (
     <html {...props.htmlAttributes}>
       <head>
