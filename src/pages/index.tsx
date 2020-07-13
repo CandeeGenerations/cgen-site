@@ -38,7 +38,6 @@ export const HomeContext = React.createContext<HomeData>(undefined)
 
 const Home = ({data}: HomeProps): JSX.Element => {
   useEffect(() => {
-    console.log('urls :', [window.location.host, window.location.href])
     if (
       window.location.host === 'candeegenerations.com' ||
       window.location.href === 'http://www.candeegenerations.com/'
